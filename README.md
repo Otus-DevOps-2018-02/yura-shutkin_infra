@@ -31,7 +31,7 @@ gem install travis -v 1.8.8 --no-rdoc --no-ri
 If you wish connect to your server through bastion host you can setup ~/.ssh/config like this
 
 With the same ssh key
-```
+```bash
 Host someinternalhost
     HostName 10.0.0.2
     IdentityFile ~/.ssh/appuser
@@ -44,11 +44,11 @@ Host bastion
     IdentityFile ~/.ssh/appuser
 
 ```
-```
+```bash
 ssh someinternalhost
 ```
 With the different keys
-```
+```bash
 Host someinternalhost
     HostName 10.164.0.3
     IdentityFile ~/.ssh/appuser
@@ -60,6 +60,13 @@ Host bastion
     User yshutkin
     IdentityFile ~/.ssh/id_rsa
 ```
-```
+```bash
 ssh someinternalhost
+```
+
+### Specific settings
+
+```bash
+bastion_IP = 35.204.5.57
+someinternalhost_IP = 10.164.0.3
 ```
