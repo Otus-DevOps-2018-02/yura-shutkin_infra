@@ -25,3 +25,41 @@ Tanks to [http://scottolesen.com/post/installing-ruby-without-sudo/](http://scot
 ```bash
 gem install travis -v 1.8.8 --no-rdoc --no-ri
 ```
+
+## Tips and Tricks
+
+If you wish connect to your server through bastion host you can setup ~/.ssh/config like this
+
+With the same ssh key
+```
+Host someinternalhost
+    HostName 10.0.0.2
+    IdentityFile ~/.ssh/appuser
+    User appuser
+    ProxyCommand ssh -A bastion -W %h:%p
+
+Host bastion
+    HostName bastion.mydomain.com
+    User appuser
+    IdentityFile ~/.ssh/appuser
+
+```
+```
+ssh someinternalhost
+```
+With the different keys
+```
+Host someinternalhost
+    HostName 10.164.0.3
+    IdentityFile ~/.ssh/appuser
+    User appuser
+    ProxyCommand ssh -A bastion -W %h:%p
+
+Host bastion
+    HostName 35.204.5.57
+    User yshutkin
+    IdentityFile ~/.ssh/id_rsa
+```
+```
+ssh someinternalhost
+```
