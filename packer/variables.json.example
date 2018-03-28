@@ -1,0 +1,10 @@
+{
+  "project_id": "infra-000000",
+  "source_image_family": "ubuntu-1604-lts",
+  "machine_type": "f1-micro",
+  "disk_type": "pd-standard",
+  "disk_size": "10",
+  "network": "default",
+  "network_tags": "",
+  "image_description": "If you see this words someone did not change this field"
+}
