@@ -1,0 +1,18 @@
+[Unit]
+Description = Reddit app
+Requires=network-online.target
+After=network.target
+
+[Service]
+User=appuser
+Group=appuser
+WorkingDirectory=/home/appuser/reddit
+PIDFile=/run/reddit-app.pid
+ExecStart=/usr/local/bin/puma
+ExecReload=/bin/kill -HUP $MAINPID
+Restart=on-failure
+KillSignal=SIGINT
+
+[Install]
+WantedBy = multi-user.target
+

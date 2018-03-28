@@ -52,11 +52,20 @@ home link: [https://www.packer.io](https://www.packer.io)
 ### Examples
 ```bash
 cd packer
-packer validate -var-file=variables.json ubunu16.json
+packer validate -var-file=variables.json ubuntu16.json
 packer build -var-file=variables.json ubuntu16.json
+
+packer validate -var-file=variables.json ubuntu16.json
+packer build -var-file=variables.json immutable.json
 ```
 ```bash
 gcloud compute instances create reddit-app --boot-disk-size=10GB --image-family reddit-base --image-project=infra-198021 --machine-type=g1-small --tags puma-server --restart-on-failure
+
+gcloud compute instances create reddit-app --boot-disk-size=10GB --image-family reddit-full --image-project=infra-198021 --machine-type=g1-small --tags puma-server --restart-on-failure
+```
+or to create VM with reddit app
+```bash
+config-scripts/create-reddit-vm.sh
 ```
 
 ## Tips and Tricks

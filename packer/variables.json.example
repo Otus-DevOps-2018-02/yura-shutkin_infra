@@ -6,5 +6,6 @@
   "disk_size": "10",
   "network": "default",
   "network_tags": "",
-  "image_description": "If you see this words someone did not change this field"
+  "image_description": "You can put here app version",
+  "release": "v1.0.0"
 }
