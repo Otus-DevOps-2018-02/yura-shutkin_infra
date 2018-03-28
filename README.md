@@ -28,7 +28,7 @@ gem install travis -v 1.8.8 --no-rdoc --no-ri
 
 ### Reddit app up and running
 ```bash
-gcloud compute instances create reddit-app  --boot-disk-size=10GB   --image-family ubuntu-1604-lts   --image-project=ubuntu-os-cloud   --machine-type=g1-small   --tags puma-server   --restart-on-failure --metadata startup-script-url=https://raw.githubusercontent.com/Otus-DevOps-2018-02/yura-shutkin_infra/cloud-testapp/startup.sh
+gcloud compute instances create reddit-app --boot-disk-size=10GB --image-family ubuntu-1604-lts --image-project=ubuntu-os-cloud --machine-type=g1-small --tags puma-server --restart-on-failure --metadata startup-script-url=https://raw.githubusercontent.com/Otus-DevOps-2018-02/yura-shutkin_infra/cloud-testapp/config-scripts/startup.s
 ```
 
 #### Reddit app requisites
