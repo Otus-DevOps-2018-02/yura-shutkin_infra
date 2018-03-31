@@ -26,6 +26,22 @@ Tanks to [http://scottolesen.com/post/installing-ruby-without-sudo/](http://scot
 gem install travis -v 1.8.8 --no-rdoc --no-ri
 ```
 
+### Reddit app up and running
+```bash
+gcloud compute instances create reddit-app  --boot-disk-size=10GB   --image-family ubuntu-1604-lts   --image-project=ubuntu-os-cloud   --machine-type=g1-small   --tags puma-server   --restart-on-failure --metadata startup-script-url=https://raw.githubusercontent.com/Otus-DevOps-2018-02/yura-shutkin_infra/cloud-testapp/startup.sh
+```
+
+#### Reddit app requisites
+```bash
+testapp_IP = 35.204.200.177
+testapp_port = 9292
+```
+
+### Open default puma server port on firewall
+```bash
+gcloud compute firewall-rules create default-puma-server --allow tcp:9292 --network default --source-ranges 0.0.0.0/0 --target-tags puma-server
+```
+
 ## Tips and Tricks
 
 If you wish connect to your server through bastion host you can setup ~/.ssh/config like this
