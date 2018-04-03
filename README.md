@@ -55,13 +55,13 @@ cd packer
 packer validate -var-file=variables.json ubuntu16.json
 packer build -var-file=variables.json ubuntu16.json
 
-packer validate -var-file=variables.json ubuntu16.json
+packer validate -var-file=variables.json immutable.json
 packer build -var-file=variables.json immutable.json
 ```
 ```bash
-gcloud compute instances create reddit-app --boot-disk-size=10GB --image-family reddit-base --image-project=infra-198021 --machine-type=g1-small --tags puma-server --restart-on-failure
+gcloud compute instances create reddit-app --boot-disk-size=10GB --image-family reddit-base --image-project={{ your-project-id }} --machine-type=g1-small --tags puma-server --restart-on-failure
 
-gcloud compute instances create reddit-app --boot-disk-size=10GB --image-family reddit-full --image-project=infra-198021 --machine-type=g1-small --tags puma-server --restart-on-failure
+gcloud compute instances create reddit-app --boot-disk-size=10GB --image-family reddit-full --image-project={{ your-project-id }} --machine-type=g1-small --tags puma-server --restart-on-failure
 ```
 or to create VM with reddit app
 ```bash
