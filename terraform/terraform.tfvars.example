@@ -1,0 +1,5 @@
+project = "project_name-project_num"
+zone = "europe-west1-b"
+private_key_path = "/path/to/private_rsa_key"
+public_key_path = "/path/to/private_rsa_key.pub"
+disk_image = "image family"
