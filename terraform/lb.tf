@@ -8,6 +8,7 @@ resource "google_compute_backend_service" "reddit-app-backend-service" {
   protocol    = "HTTP"
   timeout_sec = 10
   enable_cdn  = false
+  connection_draining_timeout_sec = 20
 
   backend {
     group = "${google_compute_instance_group.reddit-app-group.self_link}"
@@ -25,7 +26,8 @@ resource "google_compute_instance_group" "reddit-app-group" {
   zone               = "${var.zone}"
 
   instances = [
-    "${google_compute_instance.app.self_link}",
+    "${google_compute_instance.app-1.self_link}",
+    "${google_compute_instance.app-2.self_link}",
   ]
 
   named_port {
