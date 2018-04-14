@@ -29,7 +29,7 @@ resource "google_compute_instance" "app" {
     }
   }
   metadata {
-    ssh-keys = "appuser:${file(var.public_key_path)}"
+    ssh-keys = "appuser:${file(var.public_key_path)}appuser1:${file(var.public_key_path)}appuser2:${file(var.public_key_path)}"
   }
 
   // metadata_startup_script = "echo hi > /test.txt"

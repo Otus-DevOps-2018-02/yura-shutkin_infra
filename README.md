@@ -68,6 +68,12 @@ or to create VM with reddit app
 config-scripts/create-reddit-vm.sh
 ```
 
+## Terraform-1
+
+Troubles with project metadata:
+* Format is "user:${path}other_user:${path}"
+* appuser_web ssh key not visible with command ```terraform plan``` nor ```terraform apply```
+
 ## Tips and Tricks
 
 If you wish connect to your server through bastion host you can setup ~/.ssh/config like this
