@@ -3,3 +3,4 @@ zone = "europe-west1-b"
 private_key_path = "~/.ssh/appuser"
 public_key_path = "~/.ssh/appuser.pub"
 disk_image = "image family"
+instances_count = 2
