@@ -74,6 +74,16 @@ Troubles with project metadata:
 * Format is "user:${path}other_user:${path}"
 * appuser_web ssh key not visible with command ```terraform plan``` nor ```terraform apply```
 
+## Terraform-2
+
+prod configs path terraform/prod
+
+stage configs path terraform/stage
+
+states stored at storage-bucket-test-615c5b82c33a352b-1
+
+If you run terraform apply on both directories you'll get error with something like: resource already exists
+
 ## Tips and Tricks
 
 If you wish connect to your server through bastion host you can setup ~/.ssh/config like this
