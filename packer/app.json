@@ -30,6 +30,31 @@
       "type": "shell",
       "script": "scripts/install_ruby.sh",
       "execute_command": "sudo {{.Path}}"
+    },
+    {
+      "type": "shell",
+      "script": "scripts/deploy.sh",
+      "environment_vars": [
+        "RELEASE={{user `release`}}"
+      ],
+      "execute_command": "{{.Vars}} {{.Path}}"
+    },
+    {
+      "type": "file",
+      "source": "files/reddit-app.service",
+      "destination": "/tmp/reddit-app.service"
+    },
+    {
+      "type": "shell",
+      "inline": "sudo mv /tmp/reddit-app.service /etc/systemd/system/"
+    },
+    {
+      "type": "shell",
+      "inline": "sudo chown root:root /etc/systemd/system/reddit-app.service"
+    },
+    {
+      "type": "shell",
+      "inline": "sudo systemctl enable reddit-app.service"
     }
   ]
 }
