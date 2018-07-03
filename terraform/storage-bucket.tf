@@ -7,7 +7,7 @@ provider "google" {
 module "storage-bucket" {
   source  = "SweetOps/storage-bucket/google"
   version = "0.1.1"
-  name    = ["storage-bucket-test-615c5b82c33a352b-1", "storage-bucket-test-615c5b82c33a352b-2"]
+  name    = ["storage-bucket-test-615c5b82c33a352b-1"]
 }
 
 output storage-bucket_url {
