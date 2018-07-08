@@ -24,12 +24,5 @@
     "tags": "{{user `network_tags`}}",
     "image_description": "{{user `image_description`}}"
     }
-  ],
-  "provisioners": [
-    {
-      "type": "shell",
-      "script": "scripts/install_mongodb.sh",
-      "execute_command": "sudo {{.Path}}"
-    }
   ]
 }
