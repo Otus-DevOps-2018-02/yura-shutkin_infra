@@ -90,6 +90,16 @@ json - not very user friendly, but it is possible to get if from outside like da
 yml - most interesting for me type
 ini - very simple 
 
+## Ansible-2
+
+Apps should not be installed by default. That's why I need to recreate instances with terraform
+```bash
+terraform taint -module=app google_compute_instance.reddit-app
+```
+```bash
+terraform taint -module=db google_compute_instance.reddit-db
+```
+
 ## Tips and Tricks
 
 If you wish connect to your server through bastion host you can setup ~/.ssh/config like this

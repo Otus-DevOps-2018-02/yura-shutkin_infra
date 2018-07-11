@@ -24,5 +24,12 @@
     "tags": "{{user `network_tags`}}",
     "image_description": "{{user `image_description`}}"
     }
+  ],
+  "provisioners": [
+    {
+      "type": "shell",
+      "script": "scripts/ansible_requirements.sh",
+      "execute_command": "sudo {{.Path}}"
+    }
   ]
 }
