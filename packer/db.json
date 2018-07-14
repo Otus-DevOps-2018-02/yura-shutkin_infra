@@ -28,8 +28,7 @@
   "provisioners": [
     {
       "type": "shell",
-      "script": "scripts/ansible_requirements.sh",
-      "execute_command": "sudo {{.Path}}"
+      "inline": ["sudo apt update && sudo apt -y install python python-apt"]
     }
   ]
 }
