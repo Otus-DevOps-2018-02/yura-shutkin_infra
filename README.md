@@ -84,6 +84,12 @@ states stored at storage-bucket-test-615c5b82c33a352b-1
 
 If you run terraform apply on both directories you'll get error with something like: resource already exists
 
+## Ansible-1
+
+json - not very user friendly, but it is possible to get if from outside like database
+yml - most interesting for me type
+ini - very simple 
+
 ## Tips and Tricks
 
 If you wish connect to your server through bastion host you can setup ~/.ssh/config like this
