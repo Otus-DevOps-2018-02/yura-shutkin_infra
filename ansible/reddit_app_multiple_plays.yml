@@ -1,0 +1,115 @@
+---
+- name: Configure Mongodb server
+  hosts: db
+  become: true
+  vars:
+    mongo_bind_ip: 0.0.0.0
+  tags: db-tag
+  tasks:
+    - name: Ensures mongod key added
+      apt_key:
+        keyserver: "hkp://keyserver.ubuntu.com:80"
+        id: EA312927
+        state: present
+
+    - name: Ensures mongod repo exists
+      apt_repository:
+        repo: "deb http://repo.mongodb.org/apt/ubuntu xenial/mongodb-org/3.2 multiverse"
+        filename: mongodb-org
+        mode: "0644"
+        state: present
+
+    - name: Ensures mongod installed
+      apt:
+        update_cache: true
+        name: mongodb-org
+        state: present
+
+    - name: Ensures mongod started
+      service:
+        name: mongod
+        state: started
+
+    - name: Change mongo config file
+      template:
+        src: templates/mongod.conf.j2
+        dest: /etc/mongod.conf
+        mode: 0644
+      notify: restart mongod
+
+
+  handlers:
+  - name: restart mongod
+    become: true
+    service:
+      name: mongod
+      state: restarted
+    tags: app-tag
+
+
+- name: Configure app server
+  hosts: app
+  become: true
+  vars:
+    db_host: 10.132.0.2
+  tags: app-tag
+  tasks:
+    - name: Ensures ruby installed
+      apt:
+        name: "{{ package }}"
+        state: present
+        update_cache: true
+      with_items:
+        - ruby-full
+        - ruby-bundler
+        - build-essential
+      loop_control:
+        loop_var: package
+
+    - name: Add unit file for Puma
+      copy:
+        src: puma.service
+        dest: /etc/systemd/system/puma.service
+      notify: reload puma
+
+    - name: Enable puma
+      become: true
+      systemd:
+        name: puma
+        enabled: true
+
+    - name: Add config for DB connection
+      template:
+        src: templates/db_config.j2
+        dest: /home/appuser/db_config
+
+  handlers:
+  - name: reload puma
+    become: true
+    systemd:
+      name: puma
+      state: restarted
+
+
+- name: Deploy redditapp
+  hosts: app
+  tags: deploy-tag
+  tasks:
+    - name: Fetch the latest version of application code
+      git:
+        repo: 'https://github.com/express42/reddit.git'
+        dest: /home/appuser/reddit
+        version: monolith
+      notify: reload puma
+
+    - name: Bundle install
+      bundler:
+        state: present
+        chdir: /home/appuser/reddit
+
+  handlers:
+  - name: reload puma
+    become: true
+    systemd:
+      name: puma
+      state: restarted

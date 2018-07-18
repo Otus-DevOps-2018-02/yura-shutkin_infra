@@ -1,0 +1,45 @@
+---
+- name: Configure Mongodb server
+  hosts: db
+  become: true
+  vars:
+    mongo_bind_ip: 0.0.0.0
+  tasks:
+    - name: Ensures mongod key added
+      apt_key:
+        keyserver: "hkp://keyserver.ubuntu.com:80"
+        id: EA312927
+        state: present
+
+    - name: Ensures mongod repo exists
+      apt_repository:
+        repo: "deb http://repo.mongodb.org/apt/ubuntu xenial/mongodb-org/3.2 multiverse"
+        filename: mongodb-org
+        mode: "0644"
+        state: present
+
+    - name: Ensures mongod installed
+      apt:
+        update_cache: true
+        name: mongodb-org
+        state: present
+
+    - name: Ensures mongod started
+      service:
+        name: mongod
+        state: started
+
+    - name: Change mongo config file
+      template:
+        src: templates/mongod.conf.j2
+        dest: /etc/mongod.conf
+        mode: 0644
+      notify: restart mongod
+
+
+  handlers:
+  - name: restart mongod
+    become: true
+    service:
+      name: mongod
+      state: restarted
